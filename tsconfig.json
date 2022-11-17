@@ -1,0 +1,17 @@
+{
+   "compilerOptions": {
+     "module": "commonjs",
+     "noImplicitAny": true,
+     "removeComments": true,
+     "sourceMap": true,
+   //  "outDir": "dist" //Вказується папка де будуть зберігатися файли JS
+   },
+   "include": [
+      "**/*"
+   ],
+   "exclude": [
+      "node_modules", 
+      "**/*.spec.ts"
+   ]
+}
+ 
