@@ -1,24 +1,17 @@
 /**
- * The Creator class declares the factory method that is supposed to return an
- * object of a Product class. The Creator's subclasses usually provide the
- * implementation of this method.
+ * Клас Creator оголошує фабричний метод, який має повертати об’єкт класу Product. Підкласи Creator зазвичай забезпечують реалізацію цього методу.
  */
  abstract class Creator {
    /**
-    * Note that the Creator may also provide some default implementation of the
-    * factory method.
+   Зауважте, що Творець також може надати деяку реалізацію фабричного методу за замовчуванням.
     */
    public abstract factoryMethod(): Product;
 
    /**
-    * Also note that, despite its name, the Creator's primary responsibility is
-    * not creating products. Usually, it contains some core business logic that
-    * relies on Product objects, returned by the factory method. Subclasses can
-    * indirectly change that business logic by overriding the factory method
-    * and returning a different type of product from it.
+    Також зауважте, що, незважаючи на назву, основним обов’язком Творця є не створення продуктів. Зазвичай він містить певну основну бізнес-логіку, яка спирається на об’єкти Product, повернуті фабричним методом. Підкласи можуть опосередковано змінювати цю бізнес-логіку, перекриваючи фабричний метод і повертаючи з нього інший тип продукту.
     */
    public someOperation(): string {
-       // Call the factory method to create a Product object.
+       // Викличте фабричний метод, щоб створити об’єкт Product.
        const product = this.factoryMethod();
        // Now, use the product.
        return `Creator: The same creator's code has just worked with ${product.operation()}`;
@@ -26,15 +19,11 @@
 }
 
 /**
-* Concrete Creators override the factory method in order to change the
-* resulting product's type.
+* конкретні Творці замінюють заводський метод, щоб змінити тип отриманого продукту.
 */
 class ConcreteCreator1 extends Creator {
    /**
-    * Note that the signature of the method still uses the abstract product
-    * type, even though the concrete product is actually returned from the
-    * method. This way the Creator can stay independent of concrete product
-    * classes.
+    * Зауважте, що в сигнатурі методу все ще використовується абстрактний тип продукту, навіть якщо конкретний продукт фактично повертається з методу. Таким чином Творець може залишатися незалежним від конкретних класів продуктів.
     */
    public factoryMethod(): Product {
        return new ConcreteProduct1();
@@ -48,15 +37,14 @@ class ConcreteCreator2 extends Creator {
 }
 
 /**
-* The Product interface declares the operations that all concrete products must
-* implement.
+* Інтерфейс продукту оголошує операції, які мають реалізовувати всі конкретні продукти.
 */
 interface Product {
    operation(): string;
 }
 
 /**
-* Concrete Products provide various implementations of the Product interface.
+* Конкретні продукти пропонують різні реалізації інтерфейсу продукту.
 */
 class ConcreteProduct1 implements Product {
    public operation(): string {
@@ -71,9 +59,7 @@ class ConcreteProduct2 implements Product {
 }
 
 /**
-* The client code works with an instance of a concrete creator, albeit through
-* its base interface. As long as the client keeps working with the creator via
-* the base interface, you can pass it any creator's subclass.
+* Клієнтський код працює з екземпляром конкретного творця, хоча й через його базовий інтерфейс. Поки клієнт продовжує працювати з творцем через базовий інтерфейс, ви можете передати йому будь-який підклас творця.
 */
 function clientCode(creator: Creator) {
    // ...
@@ -83,8 +69,7 @@ function clientCode(creator: Creator) {
 }
 
 /**
-* The Application picks a creator's type depending on the configuration or
-* environment.
+* Програма вибирає тип творця залежно від конфігурації чи середовища.
 */
 console.log('App: Launched with the ConcreteCreator1.');
 clientCode(new ConcreteCreator1());
@@ -92,6 +77,8 @@ console.log('');
 
 console.log('App: Launched with the ConcreteCreator2.');
 clientCode(new ConcreteCreator2());
+
+/*
 Output.txt: Результат виконання
 App: Launched with the ConcreteCreator1.
 Client: I'm not aware of the creator's class, but it still works.
@@ -100,3 +87,4 @@ Creator: The same creator's code has just worked with {Result of the ConcretePro
 App: Launched with the ConcreteCreator2.
 Client: I'm not aware of the creator's class, but it still works.
 Creator: The same creator's code has just worked with {Result of the ConcreteProduct2}
+*/
