@@ -58,58 +58,13 @@ var ConcreteProduct2 = (function () {
     };
     return ConcreteProduct2;
 }());
-function clientCode(creator) {
+function clientCode1(creator) {
     console.log('Client: I\'m not aware of the creator\'s class, but it still works.');
     console.log(creator.someOperation());
 }
 console.log('App: Launched with the ConcreteCreator1.');
-clientCode(new ConcreteCreator1());
+clientCode1(new ConcreteCreator1());
 console.log('');
 console.log('App: Launched with the ConcreteCreator2.');
-clientCode(new ConcreteCreator2());
-Output.txt;
-Результат;
-виконання;
-App: Launched;
-with (the)
-    ConcreteCreator1.
-        Client;
-I;
-'m not aware of the creator';
-s;
-var default_1 = (function () {
-    function default_1() {
-    }
-    return default_1;
-}());
-but;
-it;
-still;
-works.
-    Creator;
-The;
-same;
-creator;
-'s code has just worked with {Result of the ConcreteProduct1};
-App: Launched;
-with (the)
-    ConcreteCreator2.
-        Client;
-I;
-'m not aware of the creator';
-s;
-var default_2 = (function () {
-    function default_2() {
-    }
-    return default_2;
-}());
-but;
-it;
-still;
-works.
-    Creator;
-The;
-same;
-creator;
-'s code has just worked with {Result of the ConcreteProduct2};
+clientCode1(new ConcreteCreator2());
 //# sourceMappingURL=script.js.map

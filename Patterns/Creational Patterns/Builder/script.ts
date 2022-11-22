@@ -61,7 +61,7 @@ class ConcreteProduct2 implements Product {
 /**
 * Клієнтський код працює з екземпляром конкретного творця, хоча й через його базовий інтерфейс. Поки клієнт продовжує працювати з творцем через базовий інтерфейс, ви можете передати йому будь-який підклас творця.
 */
-function clientCode(creator: Creator) {
+function clientCode1(creator: Creator) {
    // ...
    console.log('Client: I\'m not aware of the creator\'s class, but it still works.');
    console.log(creator.someOperation());
@@ -72,11 +72,11 @@ function clientCode(creator: Creator) {
 * Програма вибирає тип творця залежно від конфігурації чи середовища.
 */
 console.log('App: Launched with the ConcreteCreator1.');
-clientCode(new ConcreteCreator1());
+clientCode1(new ConcreteCreator1());
 console.log('');
 
 console.log('App: Launched with the ConcreteCreator2.');
-clientCode(new ConcreteCreator2());
+clientCode1(new ConcreteCreator2());
 
 /*
 Output.txt: Результат виконання
