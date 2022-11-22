@@ -1,45 +1,74 @@
-interface Shoes {
-   firstPart: "sole";
-   secondPart: "mainPart";
-}
-interface Sneakers {
-name: "sneakers";
-laces: "laces";
+interface CreatorOFAbstractFactory {
+   creatorBall(): Ball;
+   creatorGlue(): Glue;
 }
 
-//let Shoes: Shoes {
-//   firstPart = 'sole',
-//   secondPart = 'mainPart',
-//}
 
-
-interface Sandals {
-   name: "sandals";
-   strabs: "strabs";
-}
-
-class Sneakers implements Sneakers, Shoes {
-   firstPart: "sole" = 'sole';
-   secondPart: "mainPart" = 'mainPart';
-
-   constructor(pt:Sneakers) {
-      this.firstPart
-      this.secondPart
+class CreatorRubber implements CreatorOFAbstractFactory {
+   creatorBall(): Ball {
+      return new RubberBall()
    }
-   createShoes(): void {
-      console.log(`We used the ${this.firstPart}, ${this.secondPart}, ${this.laces} to create ${this.name}`);      
+   creatorGlue(): Glue {
+      return new RubberGlue()
    }
 }
 
-class Sandals implements Sandals, Shoes {
-   firstPart: "sole" = 'sole';
-   secondPart: "mainPart" = 'mainPart';
+class CreatorPlastic implements CreatorOFAbstractFactory {
+   creatorBall(): Ball {
+      return new PlasticBall()
+   };
+   creatorGlue(): Glue {
+      return new PlasticGlue()
+   };
+}
 
-   constructor(pt:Sandals) {
-      this.firstPart
-      this.secondPart
-   }
-   createShoes(): void {
-      console.log(`We used the ${this.firstPart}, ${this.secondPart}, ${this.strabs} to create ${this.name}`);      
+interface Ball {
+   jump(): string;
+}
+
+class RubberBall {
+   jump(): string {
+      return `пластиковий м'яч, що погано стрибає`
    }
 }
+
+class PlasticBall {
+   jump(): string {
+      return `гумовий м'яч, що гарно стрибає`
+   }
+}
+
+interface Glue {
+   introduction(): string;
+   toGlue(prodact: Ball): string; 
+}
+
+class RubberGlue {
+   introduction() {
+      return `Я клей для гуми`
+   }
+   toGlue(prodact: Ball): string {
+      const ball = prodact.jump();
+      return `${this.introduction()}, що клеїть ${ball}`
+   } 
+}
+
+class PlasticGlue {
+   introduction() {
+      return `Я клей для пластика`
+   }
+   toGlue(prodact: Ball): string {
+      const ball = prodact.jump();
+      return `${this.introduction()}, що клеїть ${ball}`
+   } 
+}
+
+function bayABall(creator:CreatorOFAbstractFactory) {
+   const ball = creator.creatorBall();
+   const glue = creator.creatorGlue();
+   console.log(glue.introduction());
+   console.log(glue.toGlue(ball));   
+}
+
+bayABall(new CreatorRubber());
+bayABall(new CreatorPlastic());
