@@ -1,70 +1,65 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Creator = (function () {
-    function Creator() {
+var IceBuilder = (function () {
+    function IceBuilder() {
+        this.reset();
     }
-    Creator.prototype.someOperation = function () {
-        var product = this.factoryMethod();
-        return "Creator: The same creator's code has just worked with ".concat(product.operation());
+    IceBuilder.prototype.reset = function () {
+        this.dessert = new Ice;
     };
-    return Creator;
+    IceBuilder.prototype.addBasis = function () {
+        this.dessert.ingredients.push('пломбір');
+    };
+    IceBuilder.prototype.addApricoteJam = function () {
+        this.dessert.ingredients.push('абрикосовий джем');
+    };
+    IceBuilder.prototype.addStrawberyJam = function () {
+        this.dessert.ingredients.push('полуничний джем');
+    };
+    IceBuilder.prototype.addChocolate = function () {
+        this.dessert.ingredients.push('шоколад');
+    };
+    IceBuilder.prototype.getDessert = function () {
+        var ice = this.dessert;
+        this.reset();
+        return ice;
+    };
+    return IceBuilder;
 }());
-var ConcreteCreator1 = (function (_super) {
-    __extends(ConcreteCreator1, _super);
-    function ConcreteCreator1() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var Ice = (function () {
+    function Ice() {
+        this.ingredients = [];
     }
-    ConcreteCreator1.prototype.factoryMethod = function () {
-        return new ConcreteProduct1();
+    Ice.prototype.getIce = function () {
+        console.log("\u0414\u043B\u044F \u043F\u0440\u0438\u0433\u043E\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u0432\u0438\u043A\u043E\u0440\u0438\u0441\u0442\u0430\u043B\u0438: ".concat(this.ingredients.join(', ')));
     };
-    return ConcreteCreator1;
-}(Creator));
-var ConcreteCreator2 = (function (_super) {
-    __extends(ConcreteCreator2, _super);
-    function ConcreteCreator2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ConcreteCreator2.prototype.factoryMethod = function () {
-        return new ConcreteProduct2();
-    };
-    return ConcreteCreator2;
-}(Creator));
-var ConcreteProduct1 = (function () {
-    function ConcreteProduct1() {
-    }
-    ConcreteProduct1.prototype.operation = function () {
-        return '{Result of the ConcreteProduct1}';
-    };
-    return ConcreteProduct1;
+    return Ice;
 }());
-var ConcreteProduct2 = (function () {
-    function ConcreteProduct2() {
+var Director = (function () {
+    function Director() {
     }
-    ConcreteProduct2.prototype.operation = function () {
-        return '{Result of the ConcreteProduct2}';
+    Director.prototype.setBuilder = function (builder) {
+        this.builder = builder;
     };
-    return ConcreteProduct2;
+    Director.prototype.cookApricoteDessert = function () {
+        this.builder.addBasis();
+        this.builder.addApricoteJam();
+    };
+    Director.prototype.cookChocolateDessert = function () {
+        this.builder.addBasis();
+        this.builder.addChocolate();
+    };
+    return Director;
 }());
-function clientCode1(creator) {
-    console.log('Client: I\'m not aware of the creator\'s class, but it still works.');
-    console.log(creator.someOperation());
-}
-console.log('App: Launched with the ConcreteCreator1.');
-clientCode1(new ConcreteCreator1());
-console.log('');
-console.log('App: Launched with the ConcreteCreator2.');
-clientCode1(new ConcreteCreator2());
+var director = new Director;
+var iceBuilder = new IceBuilder;
+director.setBuilder(iceBuilder);
+director.cookApricoteDessert();
+console.log("\u0410\u0431\u0440\u0438\u043A\u043E\u0441\u043E\u0432\u0435 \u043C\u043E\u0440\u043E\u0437\u0438\u0432\u043E");
+iceBuilder.getDessert().getIce();
+director.cookChocolateDessert();
+console.log("\u0428\u043E\u043A\u043E\u043B\u0430\u0434\u043D\u0435 \u043C\u043E\u0440\u043E\u0437\u0438\u0432\u043E");
+iceBuilder.getDessert().getIce();
+console.log("\u041F\u043E\u043B\u0443\u043D\u0438\u0447\u043D\u0435 \u043C\u043E\u0440\u043E\u0437\u0438\u0432\u043E");
+iceBuilder.addBasis();
+iceBuilder.addStrawberyJam();
+iceBuilder.getDessert().getIce();
 //# sourceMappingURL=script.js.map
