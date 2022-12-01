@@ -12,7 +12,7 @@ var SpeedAdapter = (function () {
     function SpeedAdapter(car) {
         this.car = car;
     }
-    SpeedAdapter.prototype.rucalculationSpeed = function () {
+    SpeedAdapter.prototype.recalculationSpeed = function () {
         var speedKM = this.car.speed * 1.609344;
         return speedKM;
     };
@@ -23,8 +23,8 @@ var OverSpeeding = (function () {
         this.speedAdapter = speedAdapter;
     }
     OverSpeeding.prototype.speedComparison = function () {
-        if (this.speedAdapter.rucalculationSpeed() > 50) {
-            var deltaSpeed = Math.round(this.speedAdapter.rucalculationSpeed() - 50);
+        if (this.speedAdapter.recalculationSpeed() > 50) {
+            var deltaSpeed = Math.round(this.speedAdapter.recalculationSpeed() - 50);
             console.log("Speeding by ".concat(deltaSpeed, " km/h"));
         }
         else {
