@@ -16,9 +16,6 @@ var Facade = (function () {
 var FrameFactory = (function () {
     function FrameFactory() {
     }
-    FrameFactory.prototype.introduction = function () {
-        return "";
-    };
     FrameFactory.prototype.frame3x4 = function () {
         return "\u0440\u0430\u043C\u0446\u0456 3\u04454";
     };
@@ -30,9 +27,6 @@ var FrameFactory = (function () {
 var PictureFactory = (function () {
     function PictureFactory() {
     }
-    PictureFactory.prototype.introduction = function () {
-        return "";
-    };
     PictureFactory.prototype.picture3x4 = function () {
         return "\u041A\u0430\u0440\u0442\u0438\u043D\u0430 3\u04454";
     };
