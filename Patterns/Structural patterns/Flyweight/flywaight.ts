@@ -51,7 +51,6 @@ class CreaterForest  {
       this.forest = new Array(4);
       let i: number;
       for ( i = 0; i < 4; i++) {
-         //let a: any = this.forest[i];
          this.forest[i] = new Array(4);         
        }
    }

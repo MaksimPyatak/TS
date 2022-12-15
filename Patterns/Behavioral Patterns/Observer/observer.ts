@@ -5,11 +5,11 @@ interface ISubject {
    /**
     * Прикріпляє спостерігач observer до списку спостерігачів.
     */
-   attach(observer: Observer): void;
+   attach(observer: IObserver): void;
    /**
     * Відкріплює спостерігач observer від списку спостерігачів.
     */
-   detach(observer: Observer): void;
+   detach(observer: IObserver): void;
    /**
     * Повідомляє всіх спостерігачів про подію.
     */
@@ -17,10 +17,10 @@ interface ISubject {
 }
 
 class ConcreteSubject implements ISubject {
-   private observers: Observer[] = [];
+   private observers: IObserver[] = [];
    public state: string = "Light";
 
-   public attach(observer: Observer): void {
+   public attach(observer: IObserver): void {
       const isExist = this.observers.includes(observer);
       if (isExist) {
          return console.log(`Обсервер вже прикріплений до списку спостерігачів.`);         
@@ -29,7 +29,7 @@ class ConcreteSubject implements ISubject {
       this.observers.push(observer);
    }
 
-   public detach(observer: Observer): void {
+   public detach(observer: IObserver): void {
       const observerIndex = this.observers.indexOf(observer);
       if (observerIndex === -1) {
          return console.log(`Обсервер не прикріплено до списку спостерігачів.`);         
